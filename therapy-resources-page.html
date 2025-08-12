@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Can't Afford Therapy v1.07</title>
+    <title>I Can't Afford A Therapist</title>
     <style>
         :root {
             --primary: #6b9bd1;
@@ -311,7 +311,7 @@
         }
 
         .resource-links {
-            margin-top: 15px;
+            margin-top: 24px;
             padding-top: 15px;
             border-top: 1px solid var(--border);
             font-size: 0.9em;
@@ -325,9 +325,42 @@
             margin-bottom: 5px;
         }
 
+        /* Prominent primary action button */
+        .action-primary {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            box-shadow: 0 2px 10px var(--shadow);
+            font-weight: 700;
+        }
+
+        .action-primary:hover {
+            background: #3b78d8;
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Disclaimer box for sensitive topics */
+        .disclaimer-box {
+            background: var(--crisis-bg);
+            border: 1px solid var(--crisis-border);
+            color: var(--crisis-text);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
         .resource-links a:hover {
             text-decoration: underline;
             color: var(--primary);
+        }
+
+        /* Consistent vertical spacing inside cards */
+        .resource-card > * + * {
+            margin-top: 12px;
         }
 
         .tip-box {
@@ -428,7 +461,7 @@
             <div class="author-note">
                 Hi, I'm <a href="http://linktr.ee/julianjoseph" target="_blank">Julian</a>. Not a therapist. Just built this to help.
             </div>
-            <h1>I Can't Afford Therapy</h1>
+            <h1>I Can't Afford A Therapist</h1>
             <p class="subtitle">Therapy is expensive. Here are some options that may help.</p>
         </div>
     </header>
@@ -441,7 +474,7 @@
             </div>
 
             <div class="selector-container">
-                <button class="clear-button" id="clearBtn">Start over</button>
+                <button class="clear-button" id="clearBtn" aria-label="Clear selections">↺ Clear</button>
                 
                 <div class="question">
                     <h3>What can you realistically spend per session?</h3>
@@ -486,13 +519,16 @@
                 <div class="resources-grid" id="resourcesGrid">
                     <!-- No selection message -->
                     <div class="no-selection" id="noSelection">
-                        <p>Answer both questions above and I'll show you what's out there</p>
+                        <p>Answer the questions above to personalize results. Here are a couple of good places to start:</p>
                     </div>
 
                     <!-- Resource cards (hidden initially) -->
-                    <div class="resource-card" data-tags="free low now week">
+                    <div class="resource-card" data-tags="free low now week default">
                         <h4>AI Therapy Chatbots</h4>
                         <p>Talk to a robot about your feelings. Sounds weird, works better than you'd think. Free and available now.</p>
+                        <div class="disclaimer-box">
+                            We are not linking to specific AI therapy tools here. Many health professionals have concerns about potential risks. Please research carefully before deciding if AI chatbots are right for you.
+                        </div>
                         <div class="resource-info">
                             <div class="info-item">
                                 <span class="info-label">Cost</span>
@@ -503,11 +539,9 @@
                                 <span class="info-value">Right now</span>
                             </div>
                         </div>
-                        <a href="https://www.youper.ai" target="_blank" class="action-link">Try Youper →</a>
-                        <a href="https://woebothealth.com" target="_blank" class="action-link" style="margin-left: 20px;">Try Woebot →</a>
+                        <a href="https://www.google.com/search?q=AI+therapy+chatbots" target="_blank" class="action-link action-primary">Search Google for AI Therapy Chatbots →</a>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2021/12/15/well/mind/ai-therapy-chatbots.html" target="_blank">Benefits: NYT on AI therapy effectiveness</a>
-                            <a href="https://www.washingtonpost.com/technology/2022/01/20/ai-therapy-privacy-concerns/" target="_blank">Risks: WaPo on AI therapy limitations</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=AI+therapy+chatbots" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -524,13 +558,12 @@
                                 <span class="info-value">1-2 days</span>
                             </div>
                         </div>
-                        <a href="https://www.betterhelp.com" target="_blank" class="action-link">Visit BetterHelp →</a>
+                        <a href="https://www.betterhelp.com" target="_blank" class="action-link action-primary">Visit BetterHelp →</a>
                         <div class="tip-box">
                             Financial aid available. Can reduce cost by 40%.
                         </div>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2021/12/15/well/mind/betterhelp-online-therapy.html" target="_blank">Benefits: NYT on BetterHelp effectiveness</a>
-                            <a href="https://www.washingtonpost.com/health/2022/01/25/online-therapy-privacy-concerns/" target="_blank">Risks: WaPo on privacy issues</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=BetterHelp" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -547,10 +580,9 @@
                                 <span class="info-value">Same day</span>
                             </div>
                         </div>
-                        <a href="https://www.talkspace.com" target="_blank" class="action-link">Visit Talkspace →</a>
+                        <a href="https://www.talkspace.com" target="_blank" class="action-link action-primary">Visit Talkspace →</a>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2020/08/07/technology/talkspace-online-therapy.html" target="_blank">Benefits: NYT on Talkspace effectiveness</a>
-                            <a href="https://www.washingtonpost.com/technology/2021/03/15/online-therapy-apps-data-privacy/" target="_blank">Risks: WaPo on data privacy</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Talkspace" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -567,13 +599,12 @@
                                 <span class="info-value">1-2 weeks</span>
                             </div>
                         </div>
-                        <a href="https://openpathcollective.org" target="_blank" class="action-link">Join Open Path →</a>
+                        <a href="https://openpathcollective.org" target="_blank" class="action-link action-primary">Join Open Path →</a>
                         <div class="tip-box">
                             $65 lifetime membership if you make under $100k.
                         </div>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2022/02/15/well/mind/affordable-therapy-options.html" target="_blank">Benefits: NYT on affordable therapy networks</a>
-                            <a href="https://www.washingtonpost.com/health/2022/03/10/therapy-network-limitations/" target="_blank">Risks: WaPo on therapy network limitations</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Open+Path+Psychotherapy" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -590,10 +621,9 @@
                                 <span class="info-value">2-4 weeks (varies)</span>
                             </div>
                         </div>
-                        <a href="https://findtreatment.samhsa.gov" target="_blank" class="action-link">Find Centers →</a>
+                        <a href="https://findtreatment.samhsa.gov" target="_blank" class="action-link action-primary">Find Centers →</a>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2021/11/30/well/mind/community-mental-health-centers.html" target="_blank">Benefits: NYT on community mental health centers</a>
-                            <a href="https://www.washingtonpost.com/health/2022/02/10/mental-health-access-rural-areas/" target="_blank">Risks: WaPo on access challenges</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=community+mental+health+centers" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -610,12 +640,9 @@
                                 <span class="info-value">2-3 weeks</span>
                             </div>
                         </div>
-                        <div class="tip-box">
-                            Google "[your city] university counseling training clinic"
-                        </div>
+                        <div class="tip-box">Google "[your city] university counseling training clinic"</div>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2022/01/20/well/mind/university-therapy-training-clinics.html" target="_blank">Benefits: NYT on university training clinics</a>
-                            <a href="https://www.washingtonpost.com/health/2022/02/15/university-clinic-limitations/" target="_blank">Risks: WaPo on training clinic limitations</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=university+counseling+training+clinics" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -632,13 +659,12 @@
                                 <span class="info-value">1-3 weeks</span>
                             </div>
                         </div>
-                        <a href="https://www.psychologytoday.com/us/therapists" target="_blank" class="action-link">Search Therapists →</a>
+                        <a href="https://www.psychologytoday.com/us/therapists" target="_blank" class="action-link action-primary">Search Therapists →</a>
                         <div class="tip-box">
                             Filter by "sliding scale" and state your budget upfront.
                         </div>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2021/10/25/well/mind/how-to-find-therapist.html" target="_blank">Benefits: NYT on therapist directories</a>
-                            <a href="https://www.washingtonpost.com/health/2022/01/30/therapist-directory-challenges/" target="_blank">Risks: WaPo on directory limitations</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Psychology+Today+therapist+directory" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -659,8 +685,7 @@
                             Ask HR: "Do we have an EAP?"
                         </div>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2022/03/15/well/mind/employee-assistance-programs.html" target="_blank">Benefits: NYT on EAP programs</a>
-                            <a href="https://www.washingtonpost.com/health/2022/04/05/eap-limitations-workplace/" target="_blank">Risks: WaPo on EAP limitations</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Employee+Assistance+Program+EAP+mental+health" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -677,10 +702,9 @@
                                 <span class="info-value">1-3 days</span>
                             </div>
                         </div>
-                        <a href="https://cerebral.com" target="_blank" class="action-link">Visit Cerebral →</a>
+                        <a href="https://cerebral.com" target="_blank" class="action-link action-primary">Visit Cerebral →</a>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2022/05/04/health/cerebral-mental-health-startup.html" target="_blank">Benefits: NYT on Cerebral accessibility</a>
-                            <a href="https://www.washingtonpost.com/health/2022/05/10/cerebral-mental-health-prescriptions/" target="_blank">Risks: WaPo on prescription practices</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Cerebral+mental+health" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -701,8 +725,29 @@
                             Say: "Do you have sliding scale spots? My budget is $X per session."
                         </div>
                         <div class="resource-links">
-                            <a href="https://www.nytimes.com/2022/04/12/well/mind/sliding-scale-therapy.html" target="_blank">Benefits: NYT on sliding scale therapy</a>
-                            <a href="https://www.washingtonpost.com/health/2022/05/15/sliding-scale-challenges/" target="_blank">Risks: WaPo on sliding scale limitations</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=sliding+scale+therapy" target="_blank">Research on Google News</a>
+                        </div>
+                    </div>
+
+                    <!-- Insurance Benefits Resource (default and research time) -->
+                    <div class="resource-card" data-tags="default month">
+                        <h4>Check Your Insurance Benefits</h4>
+                        <p>Some insurance plans include a certain number of free or low-cost therapy sessions each year. This usually takes some time to set up, but it can significantly reduce costs.</p>
+                        <div class="resource-info">
+                            <div class="info-item">
+                                <span class="info-label">Cost</span>
+                                <span class="info-value">Varies (often copay; sometimes sessions free)</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Time to Start</span>
+                                <span class="info-value">1-3 weeks</span>
+                            </div>
+                        </div>
+                        <div class="tip-box">
+                            Call the number on your insurance card and ask: Do I have mental health coverage? How many therapy sessions are covered and at what cost? Do I have any free sessions? How do I find in-network therapists?
+                        </div>
+                        <div class="resource-links">
+                            <a href="https://www.google.com/search?tbm=nws&q=health+insurance+therapy+benefits" target="_blank">Research on Google News</a>
                         </div>
                     </div>
                 </div>
