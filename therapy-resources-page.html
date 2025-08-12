@@ -825,22 +825,58 @@
                 card.classList.remove('show');
             });
 
+            const hasBudget = Boolean(userSelections.budget);
+            const hasTime = Boolean(userSelections.time);
+
+            // No selections: show default starters
+            if (!hasBudget && !hasTime) {
+                noSelection.style.display = 'block';
+                resourceCards.forEach(card => {
+                    const tags = card.getAttribute('data-tags').split(' ');
+                    if (tags.includes('default')) {
+                        card.classList.add('show');
+                    }
+                });
+                return;
+            }
+
             // If both selections are made, show matching resources
-            if (userSelections.budget && userSelections.time) {
+            if (hasBudget && hasTime) {
                 noSelection.style.display = 'none';
-                
                 resourceCards.forEach(card => {
                     const tags = card.getAttribute('data-tags').split(' ');
                     const budgetMatch = tags.includes(userSelections.budget);
                     const timeMatch = tags.includes(userSelections.time);
-                    
                     if (budgetMatch && timeMatch) {
                         card.classList.add('show');
                     }
                 });
-            } else {
-                // Show no selection message if not both questions are answered
+                return;
+            }
+
+            // Partial selections
+            // If only time is selected, show matches for that time plus defaults
+            if (!hasBudget && hasTime) {
                 noSelection.style.display = 'block';
+                resourceCards.forEach(card => {
+                    const tags = card.getAttribute('data-tags').split(' ');
+                    if (tags.includes('default') || tags.includes(userSelections.time)) {
+                        card.classList.add('show');
+                    }
+                });
+                return;
+            }
+
+            // If only budget is selected, show defaults
+            if (hasBudget && !hasTime) {
+                noSelection.style.display = 'block';
+                resourceCards.forEach(card => {
+                    const tags = card.getAttribute('data-tags').split(' ');
+                    if (tags.includes('default')) {
+                        card.classList.add('show');
+                    }
+                });
+                return;
             }
         }
 
