@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.07">
+    <meta name="version" content="0.10">
     <!-- Open Graph / Share Card -->
     <meta property="og:title" content="I Can't Afford A Therapist">
     <meta property="og:description" content="Therapy is expensive. Here are some options that may help.">
@@ -20,20 +20,43 @@
     <title>I Can't Afford A Therapist</title>
     <style>
         :root {
-            --primary: #6b9bd1;
-            --primary-light: #a8c5e6;
-            --accent: #f7c59f;
-            --warm: #ffeaa7;
-            --text-dark: #2d3436;
-            --text-light: #636e72;
+            /* Primary Color Palette - Warm Blue */
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            
+            /* Accent Colors - Warm Orange */
+            --accent: #f97316;
+            --accent-light: #fb923c;
+            --accent-dark: #ea580c;
+            
+            /* Background Colors */
             --bg-white: #ffffff;
-            --bg-light: #f8fafb;
+            --bg-light: #f8fafc;
             --bg-card: #ffffff;
-            --border: #e8ecef;
+            --bg-warm: #fef7ed;
+            
+            /* Text Colors */
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --text-muted: #94a3b8;
+            
+            /* Border & Shadow */
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
             --shadow: rgba(0, 0, 0, 0.06);
-            --crisis-bg: #fff5f5;
-            --crisis-border: #feb2b2;
-            --crisis-text: #c53030;
+            --shadow-hover: rgba(0, 0, 0, 0.1);
+            
+            /* Crisis Colors - Warm Red */
+            --crisis-bg: #fef2f2;
+            --crisis-border: #fca5a5;
+            --crisis-text: #dc2626;
+            --section-divider: #dc2626;
+            
+            /* Success/Info Colors */
+            --success-bg: #f0fdf4;
+            --success-border: #bbf7d0;
+            --success-text: #166534;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,7 +73,7 @@
         .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
         /* Crisis Banner */
-        .crisis-banner { background: var(--crisis-bg); border-bottom: 2px solid var(--crisis-border); padding: 12px 0; }
+        .crisis-banner { background: var(--crisis-bg); border-bottom: 3px solid var(--section-divider); padding: 12px 0; }
         .crisis-content { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 15px; text-align: center; }
         .crisis-text { display: flex; align-items: center; gap: 10px; color: var(--crisis-text); font-weight: 500; }
         .crisis-links { display: flex; gap: 15px; flex-wrap: wrap; }
@@ -58,7 +81,7 @@
         .crisis-link:hover { background: var(--crisis-text); color: white; transform: translateY(-1px); }
 
         /* Header */
-        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 50px 0 60px; text-align: center; }
+        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 50px 0 60px; text-align: center; border-bottom: 3px solid var(--section-divider); }
         .author-note { background: rgba(255, 255, 255, 0.2); padding: 12px 20px; border-radius: 8px; display: inline-block; margin-bottom: 25px; font-size: 0.95em; }
         .author-note a { color: white; text-decoration: underline; }
         h1 { font-size: 2.5em; margin-bottom: 15px; font-weight: 700; }
@@ -71,7 +94,7 @@
         .intro-text p { color: var(--text-light); font-size: 1.1em; }
 
         /* Site-wide disclaimer */
-        .site-disclaimer { background: #fff7ed; border: 1px solid #ffedd5; color: #9a3412; padding: 14px 16px; border-radius: 10px; margin: 16px 0 30px 0; }
+        .site-disclaimer { background: var(--bg-warm); border: 1px solid var(--accent); color: var(--accent-dark); padding: 14px 16px; border-radius: 10px; margin: 16px 0 30px 0; }
 
         /* Interactive Selector */
         .selector-container { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px var(--shadow); margin-bottom: 30px; position: relative; }
@@ -82,12 +105,12 @@
         .option-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
         .option-btn { background: var(--bg-light); border: 2px solid transparent; padding: 15px 20px; border-radius: 12px; cursor: pointer; transition: all 0.2s; font-size: 15px; font-weight: 500; color: var(--text-dark); text-align: center; }
         .option-btn:hover { background: white; border-color: var(--primary-light); transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); }
-        .option-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        .option-btn.selected { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
         .option-btn .detail { display: block; font-size: 0.85em; margin-top: 3px; opacity: 0.8; }
 
         /* Resource Cards */
         .resources-container { margin-top: 30px; }
-        .resources-grid { display: grid; gap: 20px; margin-top: 20px; }
+        .resources-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
         .resource-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 15px var(--shadow); animation: slideIn 0.3s ease-out; border-left: 4px solid var(--primary); }
         @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .resource-card h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.2em; }
@@ -103,12 +126,12 @@
         .resource-links a:hover { text-decoration: underline; color: var(--primary); }
         /* Prominent primary action button */
         .action-primary { background: var(--primary); color: white !important; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--primary); box-shadow: 0 2px 10px var(--shadow); font-weight: 700; }
-        .action-primary:hover { background: #3b78d8; text-decoration: none; transform: translateY(-1px); }
+        .action-primary:hover { background: var(--primary-dark); text-decoration: none; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
         /* Disclaimer box for sensitive topics */
         .disclaimer-box { background: var(--crisis-bg); border: 1px solid var(--crisis-border); color: var(--crisis-text); padding: 12px 16px; border-radius: 8px; margin-top: 12px; margin-bottom: 12px; }
         /* Consistent vertical spacing inside cards */
         .resource-card > * + * { margin-top: 12px; }
-        .tip-box { background: var(--warm); padding: 15px 20px; border-radius: 8px; margin-top: 10px; font-size: 0.95em; color: var(--text-dark); }
+        .tip-box { background: var(--bg-warm); padding: 15px 20px; border-radius: 8px; margin-top: 10px; font-size: 0.95em; color: var(--text-dark); border-left: 3px solid var(--accent); }
 
         /* No Results */
         .no-selection { text-align: center; padding: 40px; color: var(--text-light); font-size: 1.1em; }
@@ -123,6 +146,7 @@
             h1 { font-size: 2em; }
             .crisis-content { flex-direction: column; text-align: center; gap: 10px; }
             .option-buttons { grid-template-columns: 1fr; }
+            .resources-grid { grid-template-columns: 1fr; }
             .resource-info { gap: 15px; }
             .clear-button { position: static; margin-bottom: 20px; width: 100%; }
         }
@@ -133,6 +157,17 @@
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="author-note">
+                Hi, I'm <a href="http://linktr.ee/julianjoseph" target="_blank">Julian</a>. Not a therapist. Just built this to help.
+            </div>
+            <h1>I Can't Afford A Therapist</h1>
+            <p class="subtitle">Therapy is expensive. Here are some options that may help.</p>
+        </div>
+    </header>
+
     <!-- Crisis Banner -->
     <div class="crisis-banner">
         <div class="container">
@@ -148,17 +183,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="author-note">
-                Hi, I'm <a href="http://linktr.ee/julianjoseph" target="_blank">Julian</a>. Not a therapist. Just built this to help.
-            </div>
-            <h1>I Can't Afford A Therapist</h1>
-            <p class="subtitle">Therapy is expensive. Here are some options that may help.</p>
-        </div>
-    </header>
 
     <!-- Main Interactive Section -->
     <section class="main-section">
@@ -186,9 +210,9 @@
                 <div class="question">
                     <h3>How much time do you have to deal with this?</h3>
                     <div class="option-buttons" id="timeOptions">
-                        <button class="option-btn" data-category="time" data-value="now">I need something today</button>
-                        <button class="option-btn" data-category="time" data-value="week">I have a few hours to figure this out</button>
-                        <button class="option-btn" data-category="time" data-value="month">I can spend some time researching</button>
+                        <button class="option-btn" data-category="time" data-value="now">🚨 I need something today</button>
+                        <button class="option-btn" data-category="time" data-value="week">⏰ I have a few hours</button>
+                        <button class="option-btn" data-category="time" data-value="month">📅 I can spend some time</button>
                     </div>
                 </div>
             </div>
@@ -199,6 +223,33 @@
                     <!-- No selection message -->
                     <div class="no-selection" id="noSelection">
                         <p>Answer the questions above to personalize results. Here are a couple of good places to start:</p>
+                    </div>
+
+                    <!-- Crisis Resources (show for any budget when time=now) -->
+                    <div class="resource-card" data-tags="free low medium high now">
+                        <h4>988 Suicide & Crisis Lifeline</h4>
+                        <p>Free, confidential support available 24/7. Call or text 988 to speak with a trained crisis counselor.</p>
+                        <div class="resource-info">
+                            <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free</span></div>
+                            <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
+                        </div>
+                        <a href="tel:988" class="action-link action-primary">Call 988 Now →</a>
+                        <div class="resource-links">
+                            <a href="https://988lifeline.org" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-card" data-tags="free low medium high now">
+                        <h4>Crisis Text Line</h4>
+                        <p>Text HOME to 741741 to connect with a crisis counselor via text message. Available 24/7.</p>
+                        <div class="resource-info">
+                            <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free</span></div>
+                            <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
+                        </div>
+                        <a href="sms:741741&body=HOME" class="action-link action-primary">Text HOME to 741741 →</a>
+                        <div class="resource-links">
+                            <a href="https://www.crisistextline.org" target="_blank">Learn More</a>
+                        </div>
                     </div>
 
                     <!-- Resource cards (hidden initially) -->
@@ -289,7 +340,7 @@
                         <h4>Psychology Today Directory</h4>
                         <p>Directory where therapists list their practices. Filter by sliding scale and availability.</p>
                         <div class="resource-info">
-                            <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Varies widely</span></div>
+                            <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$50-200/session</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-3 weeks</span></div>
                         </div>
                         <a href="https://www.psychologytoday.com/us/therapists" target="_blank" class="action-link action-primary">Search Therapists →</a>
@@ -322,19 +373,6 @@
                         <a href="https://cerebral.com" target="_blank" class="action-link action-primary">Visit Cerebral →</a>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=Cerebral+mental+health" target="_blank">Research on Google News</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-card" data-tags="low medium month">
-                        <h4>Sliding Scale Private Practice</h4>
-                        <p>Some therapists reserve lower-cost spots for people who can’t pay full price. You may need to ask.</p>
-                        <div class="resource-info">
-                            <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$40-80/session</span></div>
-                            <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-4 weeks</span></div>
-                        </div>
-                        <div class="tip-box">Say: "Do you have sliding scale spots? My budget is $X per session."</div>
-                        <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=sliding+scale+therapy" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
