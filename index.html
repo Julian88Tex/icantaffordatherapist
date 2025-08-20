@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.11">
+    <meta name="version" content="0.68">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JBNB0VE193"></script>
     <script>
@@ -35,15 +35,15 @@
             --primary-dark: #2563eb;
             
             /* Accent Colors - Warm Orange */
-            --accent: #f97316;
-            --accent-light: #fb923c;
-            --accent-dark: #ea580c;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-dark: #d97706;
             
             /* Background Colors */
-            --bg-white: #ffffff;
+            --bg-white: #fefefe;
             --bg-light: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-warm: #fef7ed;
+            --bg-card: #fefefe;
+            --bg-warm: #fef3c7;
             
             /* Text Colors */
             --text-dark: #1e293b;
@@ -53,8 +53,8 @@
             /* Border & Shadow */
             --border: #e2e8f0;
             --border-light: #f1f5f9;
-            --shadow: rgba(0, 0, 0, 0.06);
-            --shadow-hover: rgba(0, 0, 0, 0.1);
+            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.12);
             
             /* Crisis Colors - Warm Red */
             --crisis-bg: #fef2f2;
@@ -82,82 +82,461 @@
         .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
         /* Crisis Banner */
-        .crisis-banner { background: var(--crisis-bg); border-bottom: 3px solid var(--section-divider); padding: 12px 0; }
-        .crisis-content { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 15px; text-align: center; }
-        .crisis-text { display: flex; align-items: center; gap: 10px; color: var(--crisis-text); font-weight: 500; }
-        .crisis-links { display: flex; gap: 15px; flex-wrap: wrap; }
-        .crisis-link { background: white; color: var(--crisis-text); padding: 8px 16px; border-radius: 20px; text-decoration: none; border: 1px solid var(--crisis-border); font-size: 14px; transition: all 0.2s; font-weight: 500; }
-        .crisis-link:hover { background: var(--crisis-text); color: white; transform: translateY(-1px); }
+        .crisis-banner { background: var(--crisis-bg); padding: 12px 0; }
+        .crisis-content { display: flex; align-items: center; justify-content: center; gap: 20px; text-align: center; flex-wrap: nowrap; }
+        .crisis-text { display: flex; align-items: center; color: var(--crisis-text); font-weight: 500; white-space: nowrap; }
+        .crisis-links { display: flex; gap: 15px; flex-wrap: nowrap; }
+        .crisis-link { background: white; color: var(--crisis-text); padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 13px; transition: all 0.2s; font-weight: 500; white-space: nowrap; }
+        .crisis-link:hover { background: var(--crisis-text); color: white; }
 
         /* Header */
-        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 50px 0 60px; text-align: center; border-bottom: 3px solid var(--section-divider); }
-        .author-note { background: rgba(255, 255, 255, 0.2); padding: 12px 20px; border-radius: 8px; display: inline-block; margin-bottom: 25px; font-size: 0.95em; }
+        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0 50px; text-align: center; }
+        .author-note { background: none; padding: 0; border: none; display: inline-block; margin-bottom: 25px; font-size: 0.9em; opacity: 0.85; }
         .author-note a { color: white; text-decoration: underline; }
         h1 { font-size: 2.5em; margin-bottom: 15px; font-weight: 700; }
-        .subtitle { font-size: 1.15em; opacity: 0.95; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+        .subtitle { font-size: 1em; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.4; }
 
         /* Main Section */
-        .main-section { padding: 50px 0; background: var(--bg-light); min-height: 60vh; }
+        .main-section { padding: 30px 0; background: var(--bg-light); min-height: 60vh; }
         .intro-text { text-align: center; margin-bottom: 20px; }
         .intro-text h2 { color: var(--primary); font-size: 1.8em; margin-bottom: 10px; }
         .intro-text p { color: var(--text-light); font-size: 1.1em; }
 
         /* Site-wide disclaimer */
-        .site-disclaimer { background: var(--bg-warm); border: 1px solid var(--accent); color: var(--accent-dark); padding: 14px 16px; border-radius: 10px; margin: 16px 0 30px 0; }
+        .site-disclaimer { background: var(--bg-light); color: var(--text-light); padding: 3px 6px; border-radius: 3px; margin: 12px 0 0 0; font-size: 0.75em; border: none; text-align: center; }
 
         /* Interactive Selector */
-        .selector-container { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px var(--shadow); margin-bottom: 30px; position: relative; }
+        .selector-container { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px var(--shadow); 
+            margin-bottom: 30px; 
+            position: relative; 
+            transition: all 0.3s ease;
+        }
+
+        .selector-container:hover {
+            box-shadow: 0 4px 12px var(--shadow);
+        }
         .clear-button { position: absolute; top: 20px; right: 20px; background: transparent; border: 1px solid var(--border); color: var(--text-light); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
         .clear-button:hover { background: var(--bg-light); color: var(--text-dark); }
         .question { margin-bottom: 25px; }
         .question h3 { font-size: 1.2em; margin-bottom: 15px; color: var(--text-dark); }
         .option-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-        .option-btn { background: var(--bg-light); border: 2px solid transparent; padding: 15px 20px; border-radius: 12px; cursor: pointer; transition: all 0.2s; font-size: 15px; font-weight: 500; color: var(--text-dark); text-align: center; }
-        .option-btn:hover { background: white; border-color: var(--primary-light); transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); }
-        .option-btn.selected { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        .option-btn { 
+            background: white; 
+            border: 3px solid var(--primary-light); 
+            padding: 18px 24px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: var(--text-dark); 
+            text-align: center; 
+            box-shadow: 0 4px 8px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+
+        
+        .option-btn:hover { 
+            background: var(--bg-light); 
+            border-color: var(--primary); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px var(--shadow-hover); 
+        }
+        
+        .option-btn.selected { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary); 
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4); 
+            transform: translateY(-2px);
+        }
+
+
         .option-btn .detail { display: block; font-size: 0.85em; margin-top: 3px; opacity: 0.8; }
+
+        /* Resource Counter */
+        .resource-counter {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 8px 16px;
+            background: transparent;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .resource-counter span {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
 
         /* Resource Cards */
         .resources-container { margin-top: 30px; }
         .resources-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
-        .resource-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 15px var(--shadow); animation: slideIn 0.3s ease-out; border-left: 4px solid var(--primary); }
+        .resource-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 15px var(--shadow); animation: slideIn 0.3s ease-out; border-left: 4px solid var(--primary); }
         @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .resource-card h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.2em; }
-        .resource-card p { color: var(--text-light); margin-bottom: 12px; line-height: 1.7; }
-        .resource-info { display: flex; gap: 30px; margin: 15px 0; flex-wrap: wrap; }
+        .resource-card h4 { color: var(--primary); margin-bottom: 12px; font-size: 1.1em; }
+        .resource-card p { color: var(--text-light); margin-bottom: 16px; line-height: 1.6; font-size: 0.9em; }
+        .resource-info { display: flex; gap: 24px; margin: 16px 0; flex-wrap: wrap; }
         .info-item { display: flex; flex-direction: column; }
-        .info-label { font-size: 0.85em; color: var(--text-light); margin-bottom: 2px; }
-        .info-value { font-weight: 600; color: var(--text-dark); }
-        .resource-card .action-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; font-size: 15px; }
+        .info-label { font-size: 0.8em; color: var(--text-light); margin-bottom: 4px; }
+        .info-value { font-weight: 600; color: var(--text-dark); font-size: 0.9em; }
+        .resource-card .action-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; font-size: 14px; }
         .resource-card .action-link:hover { text-decoration: underline; }
-        .resource-links { margin-top: 24px; padding-top: 15px; border-top: 1px solid var(--border); font-size: 0.9em; }
-        .resource-links a { color: var(--text-light); text-decoration: none; display: inline-block; margin-right: 15px; margin-bottom: 5px; }
-        .resource-links a:hover { text-decoration: underline; color: var(--primary); }
+        .resource-links { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.85em; }
+        .resource-links a { 
+            color: var(--text-light); 
+            text-decoration: none; 
+            display: inline-block; 
+            margin-right: 12px; 
+            margin-bottom: 4px; 
+            transition: all 0.2s;
+        }
+        .resource-links a:hover { 
+            text-decoration: underline; 
+            color: var(--primary); 
+        }
+        
+        .resource-links a[target="_blank"]::after {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 4px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15,3 21,3 21,9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+        }
+        
+
         /* Prominent primary action button */
-        .action-primary { background: var(--primary); color: white !important; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--primary); box-shadow: 0 2px 10px var(--shadow); font-weight: 700; }
-        .action-primary:hover { background: var(--primary-dark); text-decoration: none; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+        .action-primary { background: var(--primary); color: white !important; padding: 10px 16px; border-radius: 6px; border: 1px solid var(--primary); box-shadow: 0 2px 8px var(--shadow); font-weight: 600; font-size: 14px; }
+        .action-primary:hover { background: var(--primary-dark); text-decoration: none; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); }
         /* Disclaimer box for sensitive topics */
-        .disclaimer-box { background: var(--crisis-bg); border: 1px solid var(--crisis-border); color: var(--crisis-text); padding: 12px 16px; border-radius: 8px; margin-top: 12px; margin-bottom: 12px; }
+        .disclaimer-box { background: var(--crisis-bg); border: 1px solid var(--crisis-border); color: var(--crisis-text); padding: 12px 16px; border-radius: 6px; margin-top: 16px; margin-bottom: 16px; font-size: 0.85em; }
         /* Consistent vertical spacing inside cards */
-        .resource-card > * + * { margin-top: 12px; }
-        .tip-box { background: var(--bg-warm); padding: 15px 20px; border-radius: 8px; margin-top: 10px; font-size: 0.95em; color: var(--text-dark); border-left: 3px solid var(--accent); }
+        .resource-card > * + * { margin-top: 16px; }
+        .tip-box { background: var(--bg-warm); padding: 14px 18px; border-radius: 6px; margin-top: 16px; font-size: 0.85em; color: var(--text-dark); border-left: 3px solid var(--accent); }
+        .tip-box:empty { display: none; }
+        .disclaimer-box:empty { display: none; }
 
         /* No Results */
-        .no-selection { text-align: center; padding: 40px; color: var(--text-light); font-size: 1.1em; }
+        .no-selection { 
+            text-align: center; 
+            padding: 60px 40px; 
+            color: var(--text-light); 
+            font-size: 1.3em; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 250px; 
+            grid-column: 1 / -1; 
+            width: 100%; 
+            background: linear-gradient(135deg, var(--bg-light) 0%, white 100%);
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .no-selection::before {
+            content: "👆";
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: gentleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
         /* Footer */
         footer { background: var(--primary); color: white; padding: 30px 0; text-align: center; }
         footer p { opacity: 0.9; font-size: 1em; line-height: 1.6; }
         footer a { color: white; text-decoration: underline; }
 
+        /* Feedback Buttons */
+        .feedback-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .feedback-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .feedback-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .feedback-btn.feature {
+            background: #10b981;
+        }
+
+        .feedback-btn.feature:hover {
+            background: #059669;
+        }
+
+        .feedback-btn.bug {
+            background: var(--crisis-text);
+        }
+
+        .feedback-btn.bug:hover {
+            background: #b91c1c;
+        }
+
+        @media (max-width: 768px) {
+            .feedback-buttons {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .feedback-btn {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 2em; }
-            .crisis-content { flex-direction: column; text-align: center; gap: 10px; }
+            .crisis-content { flex-direction: row; text-align: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+            .crisis-text { font-size: 0.9em; }
+            .crisis-links { flex-direction: row; gap: 6px; flex-wrap: wrap; justify-content: center; }
+            .crisis-link { padding: 6px 10px; font-size: 12px; }
             .option-buttons { grid-template-columns: 1fr; }
+            .option-btn { 
+                padding: 20px 16px; 
+                font-size: 18px; 
+                font-weight: 700; 
+                border-width: 4px;
+                margin-bottom: 8px;
+            }
+            .no-selection { 
+                padding: 40px 20px; 
+                font-size: 1.2em; 
+                min-height: 200px;
+            }
+            .no-selection::before {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
             .resources-grid { grid-template-columns: 1fr; }
             .resource-info { gap: 15px; }
             .clear-button { position: static; margin-bottom: 20px; width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .crisis-banner { padding: 8px 0; }
+            .crisis-content { 
+                flex-direction: row; 
+                gap: 6px; 
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .crisis-text { 
+                font-size: 0.85em; 
+                margin-bottom: 4px;
+            }
+            .crisis-links { 
+                flex-direction: row; 
+                gap: 4px; 
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .crisis-link { 
+                padding: 5px 8px; 
+                font-size: 11px; 
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3em;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal form {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
         }
 
         /* Hide resources initially */
@@ -169,11 +548,8 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <div class="author-note">
-                Hi, I'm <a href="http://linktr.ee/julianjoseph" target="_blank">Julian</a>. Not a therapist. Just built this to help.
-            </div>
             <h1>I Can't Afford A Therapist</h1>
-            <p class="subtitle">Therapy is expensive. Here are some options that may help.</p>
+            <p class="subtitle">Therapy is expensive. Here are some options.</p>
         </div>
     </header>
 
@@ -182,7 +558,7 @@
         <div class="container">
             <div class="crisis-content">
                 <div class="crisis-text">
-                    <span>If you need help right now, these folks are available 24/7</span>
+                    <span>Need help now? Available 24/7</span>
                 </div>
                 <div class="crisis-links">
                     <a href="tel:988" class="crisis-link">Call or Text 988</a>
@@ -196,15 +572,9 @@
     <!-- Main Interactive Section -->
     <section class="main-section">
         <div class="container">
-            <div class="intro-text">
-                <h2>Let's narrow it down</h2>
-                <div class="site-disclaimer">
-                    Information here is approximate and may change. Prices and time-to-start can vary by location and provider.
-                </div>
-            </div>
-
             <div class="selector-container">
-                <button class="clear-button" id="clearBtn" aria-label="Clear selections">↺ Clear</button>
+                <button class="clear-button" id="clearBtn" aria-label="Clear selections">Clear</button>
+
                 
                 <div class="question">
                     <h3>What can you realistically spend per session?</h3>
@@ -224,14 +594,22 @@
                         <button class="option-btn" data-category="time" data-value="month">📅 I can spend some time</button>
                     </div>
                 </div>
+                
+                <div class="site-disclaimer">
+                    Prices and availability may vary by location.
+                </div>
             </div>
 
             <!-- Dynamic Resources -->
             <div class="resources-container">
+                <div class="resource-counter" id="resourceCounter" style="display: none;">
+                    <span id="resourceCount">0</span> options found
+                </div>
                 <div class="resources-grid" id="resourcesGrid">
                     <!-- No selection message -->
                     <div class="no-selection" id="noSelection">
-                        <p>Answer the questions above to personalize results. Here are a couple of good places to start:</p>
+                        <p><strong>Click the buttons above to get started!</strong></p>
+                        <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Choose your budget and timeline to see personalized therapy options</p>
                     </div>
 
                     <!-- Crisis Resources (show for any budget when time=now) -->
@@ -243,8 +621,9 @@
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
                         </div>
                         <a href="tel:988" class="action-link action-primary">Call 988 Now →</a>
+                        <div class="tip-box"></div>
                         <div class="resource-links">
-                            <a href="https://988lifeline.org" target="_blank">Learn More</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=988+suicide+crisis+lifeline" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -256,8 +635,9 @@
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
                         </div>
                         <a href="sms:741741&body=HOME" class="action-link action-primary">Text HOME to 741741 →</a>
+                        <div class="tip-box"></div>
                         <div class="resource-links">
-                            <a href="https://www.crisistextline.org" target="_blank">Learn More</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=crisis+text+line" target="_blank">Research on Google News</a>
                         </div>
                     </div>
 
@@ -265,14 +645,14 @@
                     <div class="resource-card" data-tags="free low now week">
                         <h4>AI Therapy Chatbots</h4>
                         <p>AI chat tools that may offer mental health support. Use your judgment and research carefully.</p>
-                        <div class="disclaimer-box">
-                            We are not linking to specific AI therapy tools here. Many health professionals have concerns about potential risks. Please research carefully before deciding if AI chatbots are right for you.
-                        </div>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
                         </div>
                         <a href="https://www.google.com/search?q=AI+therapy+chatbots" target="_blank" class="action-link action-primary">Search Google for AI Therapy Chatbots →</a>
+                        <div class="disclaimer-box">
+                            We are not linking to specific AI therapy tools here. Many health professionals have concerns about potential risks. Please research carefully before deciding if AI chatbots are right for you.
+                        </div>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=AI+therapy+chatbots" target="_blank">Research on Google News</a>
                         </div>
@@ -300,6 +680,7 @@
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Same day</span></div>
                         </div>
                         <a href="https://www.talkspace.com" target="_blank" class="action-link action-primary">Visit Talkspace →</a>
+                        <div class="tip-box"></div>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=Talkspace" target="_blank">Research on Google News</a>
                         </div>
@@ -327,6 +708,7 @@
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">2-4 weeks (varies)</span></div>
                         </div>
                         <a href="https://findtreatment.samhsa.gov" target="_blank" class="action-link action-primary">Find Centers →</a>
+                        <div class="tip-box"></div>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=community+mental+health+centers" target="_blank">Research on Google News</a>
                         </div>
@@ -339,6 +721,7 @@
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$15-50/session</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">2-3 weeks</span></div>
                         </div>
+                        <a href="https://www.google.com/search?q=university+counseling+training+clinic" target="_blank" class="action-link action-primary">Search for Clinics →</a>
                         <div class="tip-box">Google "[your city] university counseling training clinic"</div>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=university+counseling+training+clinics" target="_blank">Research on Google News</a>
@@ -366,6 +749,7 @@
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free (limited sessions)</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">3-7 days</span></div>
                         </div>
+                        <a href="https://www.google.com/search?q=Employee+Assistance+Program+EAP" target="_blank" class="action-link action-primary">Learn About EAP →</a>
                         <div class="tip-box">Ask HR: "Do we have an EAP?"</div>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=Employee+Assistance+Program+EAP+mental+health" target="_blank">Research on Google News</a>
@@ -380,6 +764,7 @@
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-3 days</span></div>
                         </div>
                         <a href="https://cerebral.com" target="_blank" class="action-link action-primary">Visit Cerebral →</a>
+                        <div class="tip-box"></div>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=Cerebral+mental+health" target="_blank">Research on Google News</a>
                         </div>
@@ -393,6 +778,7 @@
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Varies (often copay; sometimes sessions free)</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-3 weeks</span></div>
                         </div>
+                        <a href="https://www.google.com/search?q=health+insurance+mental+health+benefits" target="_blank" class="action-link action-primary">Learn About Benefits →</a>
                         <div class="tip-box">Call the number on your insurance card and ask: Do I have mental health coverage? How many therapy sessions are covered and at what cost? Do I have any free sessions? How do I find in-network therapists?</div>
                         <div class="resource-links">
                             <a href="https://www.google.com/search?tbm=nws&q=health+insurance+therapy+benefits" target="_blank">Research on Google News</a>
@@ -403,11 +789,59 @@
         </div>
     </section>
 
+    <!-- Feedback Buttons -->
+    <div class="feedback-buttons">
+        <button class="feedback-btn feature" onclick="openFeedbackModal('feature')">
+            💡 Feature Request
+        </button>
+        <button class="feedback-btn bug" onclick="openFeedbackModal('bug')">
+            🐛 Report Bug
+        </button>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Feedback & Support</h2>
+                <button class="close-btn" onclick="closeFeedbackModal()">&times;</button>
+            </div>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="type">Type of feedback:</label>
+                    <select id="type" name="type" required>
+                        <option value="">Select an option</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="feature">Feature Request</option>
+                        <option value="general">General Feedback</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Brief description of the issue or feature" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" placeholder="Please provide detailed information..." required></textarea>
+                </div>
+
+
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>This is not medical advice. If you're in crisis, call 988 or text HOME to 741741 immediately.</p>
-            <p>Built by <a href="http://linktr.ee/julianjoseph" target="_blank">Julian</a> | <a href="https://github.com/Julian88Tex/icantaffordatherapist" target="_blank">View Source</a></p>
+            <p>Not medical advice. Crisis? Call 988.</p>
+            <p>Dedicated to my friends. Love 💜, <a href="http://linktr.ee/julianjoseph" target="_blank">Julian</a> | <a href="https://github.com/Julian88Tex/icantaffordatherapist" target="_blank">Source</a></p>
         </div>
     </footer>
 
@@ -463,19 +897,117 @@
             // Only show resources when both selections are made
             if (hasBudget && hasTime) {
                 noSelection.style.display = 'none';
+                let visibleCount = 0;
                 resourceCards.forEach(card => {
                     const tags = card.getAttribute('data-tags').split(' ');
                     const budgetMatch = tags.includes(userSelections.budget);
                     const timeMatch = tags.includes(userSelections.time);
-                    if (budgetMatch && timeMatch) { card.classList.add('show'); }
+                    if (budgetMatch && timeMatch) { 
+                        card.classList.add('show'); 
+                        visibleCount++;
+                    }
                 });
+                
+                // Update and show the counter
+                document.getElementById('resourceCount').textContent = visibleCount;
+                document.getElementById('resourceCounter').style.display = 'block';
             } else {
                 noSelection.style.display = 'block';
+                document.getElementById('resourceCounter').style.display = 'none';
             }
         }
 
         // Initialize the page
         updateResources();
+
+        // Feedback Modal Functions
+        function openFeedbackModal(type) {
+            const modal = document.getElementById('feedbackModal');
+            const typeSelect = document.getElementById('type');
+            
+            // Pre-select the type if provided
+            if (type) {
+                typeSelect.value = type;
+            }
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+            
+            // Reset form
+            document.getElementById('feedbackForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('feedbackModal');
+            if (event.target === modal) {
+                closeFeedbackModal();
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Build the GitHub issue body with proper formatting
+            let issueBody = '';
+            
+            if (data.type === 'bug') {
+                issueBody = `**Describe the bug**
+${data.description}
+
+**Additional context**
+Submitted via website feedback form`;
+            } else if (data.type === 'feature') {
+                issueBody = `**Is your feature request related to a problem? Please describe.**
+${data.description}
+
+**Describe the solution you'd like**
+Please provide more details about your suggested solution.
+
+**Additional context**
+Submitted via website feedback form`;
+            } else {
+                issueBody = `**General Feedback**
+${data.description}
+
+**Additional context**
+Submitted via website feedback form`;
+            }
+            
+            // Redirect to appropriate GitHub issue template with pre-filled data
+            let githubUrl = 'https://github.com/Julian88Tex/icantaffordatherapist/issues/new?';
+            
+            if (data.type === 'bug') {
+                githubUrl += 'template=bug_report.md&';
+            } else if (data.type === 'feature') {
+                githubUrl += 'template=feature_request.md&';
+            }
+            
+            githubUrl += `title=${encodeURIComponent(data.title)}&body=${encodeURIComponent(issueBody)}`;
+            
+            // Show a brief message and redirect
+            const submitBtn = document.querySelector('.btn-primary');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Redirecting to GitHub...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                window.open(githubUrl, '_blank');
+                closeFeedbackModal();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
+        });
     </script>
 </body>
 </html>

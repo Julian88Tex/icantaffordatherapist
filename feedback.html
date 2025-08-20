@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="version" content="0.05">
+    <title>Feedback - I Can't Afford A Therapist</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --accent: #f97316;
+            --bg-white: #ffffff;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 { font-size: 2em; margin-bottom: 10px; }
+        .header p { opacity: 0.9; }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            border-color: var(--primary);
+        }
+
+        .github-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .github-links h3 {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .github-btn {
+            display: inline-block;
+            background: #24292e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .github-btn:hover {
+            background: #2f363d;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .github-btn {
+                display: block;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Feedback & Support</h1>
+            <p>Help us improve by reporting issues or suggesting new features</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to main site</a>
+        
+        <div class="form-container">
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="type">Type of feedback:</label>
+                    <select id="type" name="type" required>
+                        <option value="">Select an option</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="feature">Feature Request</option>
+                        <option value="general">General Feedback</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Brief description of the issue or feature" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" placeholder="Please provide detailed information..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your email (optional):</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com">
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    <a href="index.html" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    <script>
+        // Check URL parameters for pre-selecting type
+        const urlParams = new URLSearchParams(window.location.search);
+        const typeParam = urlParams.get('type');
+        
+        if (typeParam === 'bug') {
+            document.getElementById('type').value = 'bug';
+        } else if (typeParam === 'feature') {
+            document.getElementById('type').value = 'feature';
+        }
+        
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Build the GitHub issue body with proper formatting
+            let issueBody = '';
+            
+            if (data.type === 'bug') {
+                issueBody = `**Describe the bug**
+${data.description}
+
+**Additional context**
+Submitted via website feedback form`;
+            } else if (data.type === 'feature') {
+                issueBody = `**Is your feature request related to a problem? Please describe.**
+${data.description}
+
+**Describe the solution you'd like**
+Please provide more details about your suggested solution.
+
+**Additional context**
+Submitted via website feedback form`;
+            } else {
+                issueBody = `**General Feedback**
+${data.description}
+
+**Additional context**
+Submitted via website feedback form`;
+            }
+            
+            // Redirect to appropriate GitHub issue template with pre-filled data
+            let githubUrl = 'https://github.com/Julian88Tex/icantaffordatherapist/issues/new?';
+            
+            if (data.type === 'bug') {
+                githubUrl += 'template=bug_report.md&';
+            } else if (data.type === 'feature') {
+                githubUrl += 'template=feature_request.md&';
+            }
+            
+            githubUrl += `title=${encodeURIComponent(data.title)}&body=${encodeURIComponent(issueBody)}`;
+            
+            // Show a brief message and redirect
+            const submitBtn = document.querySelector('.btn-primary');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Redirecting to GitHub...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                window.open(githubUrl, '_blank');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
