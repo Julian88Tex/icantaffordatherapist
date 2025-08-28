@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.68">
+    <meta name="version" content="0.69">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JBNB0VE193"></script>
     <script>
@@ -12,6 +12,36 @@
       gtag('js', new Date());
 
       gtag('config', 'G-JBNB0VE193');
+      
+      // Google Analytics Event Tracking Functions
+      function trackEvent(eventName, eventCategory, eventAction, eventLabel = null, eventValue = null) {
+        gtag('event', eventName, {
+          event_category: eventCategory,
+          event_action: eventAction,
+          event_label: eventLabel,
+          value: eventValue
+        });
+      }
+      
+      // Track button selections
+      function trackButtonSelection(category, value) {
+        trackEvent('button_click', 'user_selection', category, value);
+      }
+      
+      // Track resource interactions
+      function trackResourceInteraction(resourceName, action, linkType = null) {
+        trackEvent('resource_interaction', 'resource', action, resourceName, linkType);
+      }
+      
+      // Track form submissions
+      function trackFormSubmission(formType) {
+        trackEvent('form_submit', 'feedback', formType);
+      }
+      
+      // Track page engagement
+      function trackPageEngagement(action, details = null) {
+        trackEvent('page_engagement', 'engagement', action, details);
+      }
     </script>
     <!-- Open Graph / Share Card -->
     <meta property="og:title" content="I Can't Afford A Therapist">
@@ -864,6 +894,7 @@
                 this.classList.add('selected');
                 userSelections.budget = this.getAttribute('data-value');
                 updateResources();
+                trackButtonSelection('budget', this.getAttribute('data-value'));
             });
         });
 
@@ -874,6 +905,7 @@
                 this.classList.add('selected');
                 userSelections.time = this.getAttribute('data-value');
                 updateResources();
+                trackButtonSelection('time', this.getAttribute('data-value'));
             });
         });
 
@@ -884,6 +916,7 @@
             budgetButtons.forEach(btn => btn.classList.remove('selected'));
             timeButtons.forEach(btn => btn.classList.remove('selected'));
             updateResources();
+            trackButtonSelection('clear', 'all');
         });
 
         // Function to update displayed resources
@@ -911,6 +944,9 @@
                 // Update and show the counter
                 document.getElementById('resourceCount').textContent = visibleCount;
                 document.getElementById('resourceCounter').style.display = 'block';
+                
+                // Track resource display
+                trackPageEngagement('resources_displayed', `${userSelections.budget}_${userSelections.time}_${visibleCount}`);
             } else {
                 noSelection.style.display = 'block';
                 document.getElementById('resourceCounter').style.display = 'none';
@@ -919,6 +955,63 @@
 
         // Initialize the page
         updateResources();
+        
+        // Add tracking to all resource links
+        function addLinkTracking() {
+            // Track primary action links
+            document.querySelectorAll('.action-primary').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const resourceCard = this.closest('.resource-card');
+                    const resourceName = resourceCard.querySelector('h4').textContent;
+                    trackResourceInteraction(resourceName, 'primary_link_click', 'primary');
+                });
+            });
+            
+            // Track secondary resource links
+            document.querySelectorAll('.resource-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const resourceCard = this.closest('.resource-card');
+                    const resourceName = resourceCard.querySelector('h4').textContent;
+                    const linkText = this.textContent;
+                    trackResourceInteraction(resourceName, 'secondary_link_click', linkText);
+                });
+            });
+            
+            // Track crisis links
+            document.querySelectorAll('.crisis-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const linkText = this.textContent;
+                    trackEvent('crisis_link_click', 'crisis', 'link_click', linkText);
+                });
+            });
+        }
+        
+        // Initialize link tracking when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            addLinkTracking();
+            trackPageEngagement('page_load', 'initial');
+            
+            // Track scroll depth
+            let maxScroll = 0;
+            window.addEventListener('scroll', function() {
+                const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+                if (scrollPercent > maxScroll) {
+                    maxScroll = scrollPercent;
+                    if (maxScroll % 25 === 0) { // Track at 25%, 50%, 75%, 100%
+                        trackPageEngagement('scroll_depth', `${maxScroll}%`);
+                    }
+                }
+            });
+            
+            // Track time spent on page
+            let startTime = Date.now();
+            window.addEventListener('beforeunload', function() {
+                const timeSpent = Math.round((Date.now() - startTime) / 1000);
+                if (timeSpent > 10) { // Only track if spent more than 10 seconds
+                    trackPageEngagement('time_spent', `${timeSpent}s`);
+                }
+            });
+        });
 
         // Feedback Modal Functions
         function openFeedbackModal(type) {
@@ -932,6 +1025,9 @@
             
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            
+            // Track modal open
+            trackEvent('modal_open', 'feedback', 'open', type);
         }
 
         function closeFeedbackModal() {
@@ -941,6 +1037,9 @@
             
             // Reset form
             document.getElementById('feedbackForm').reset();
+            
+            // Track modal close
+            trackEvent('modal_close', 'feedback', 'close');
         }
 
         // Close modal when clicking outside
@@ -1007,6 +1106,7 @@ Submitted via website feedback form`;
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             }, 1000);
+            trackFormSubmission(data.type);
         });
     </script>
 </body>
