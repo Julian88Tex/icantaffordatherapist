@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.73">
+    <meta name="version" content="0.74">
     <meta name="description" content="Find affordable therapy options based on your budget and timeline. Free crisis support, sliding scale therapy, online platforms, and community resources.">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="tab.png">
@@ -839,9 +839,6 @@
         <button class="feedback-btn bug" onclick="openFeedbackModal('bug')">
             🐛 Report Bug
         </button>
-        <button class="feedback-btn" style="background: #8b5cf6;" onclick="testGA()">
-            🧪 Test GA
-        </button>
     </div>
 
     <!-- Feedback Modal -->
@@ -976,17 +973,7 @@
         // Initialize the page
         updateResources();
         
-        // Test GA function
-        function testGA() {
-            console.log('Test GA button clicked!');
-            gtag('event', 'click', {
-                event_category: 'test',
-                event_action: 'test_button',
-                event_label: 'GA Test Button',
-                value: 1
-            });
-            alert('GA test event sent! Check console and GA dashboard.');
-        }
+
         
         // Add tracking to all resource links
         function addLinkTracking() {
