@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.69">
+    <meta name="version" content="0.70">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JBNB0VE193"></script>
     <script>
@@ -21,26 +21,35 @@
           event_label: eventLabel,
           value: eventValue
         });
+        
+        // Debug logging
+        console.log('GA Event:', {
+          event_name: eventName,
+          event_category: eventCategory,
+          event_action: eventAction,
+          event_label: eventLabel,
+          value: eventValue
+        });
       }
       
       // Track button selections
       function trackButtonSelection(category, value) {
-        trackEvent('button_click', 'user_selection', category, value);
+        trackEvent('select_content', 'user_selection', category, value);
       }
       
       // Track resource interactions
       function trackResourceInteraction(resourceName, action, linkType = null) {
-        trackEvent('resource_interaction', 'resource', action, resourceName, linkType);
+        trackEvent('click', 'resource', action, resourceName, linkType);
       }
       
       // Track form submissions
       function trackFormSubmission(formType) {
-        trackEvent('form_submit', 'feedback', formType);
+        trackEvent('submit_form', 'feedback', formType);
       }
       
       // Track page engagement
       function trackPageEngagement(action, details = null) {
-        trackEvent('page_engagement', 'engagement', action, details);
+        trackEvent('page_view', 'engagement', action, details);
       }
     </script>
     <!-- Open Graph / Share Card -->
@@ -981,7 +990,7 @@
             document.querySelectorAll('.crisis-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     const linkText = this.textContent;
-                    trackEvent('crisis_link_click', 'crisis', 'link_click', linkText);
+                    trackEvent('click', 'crisis', 'link_click', linkText);
                 });
             });
         }
@@ -990,6 +999,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             addLinkTracking();
             trackPageEngagement('page_load', 'initial');
+            
+            // Test event that should show up as a key event
+            gtag('event', 'page_view', {
+                page_title: 'I Can\'t Afford A Therapist',
+                page_location: window.location.href
+            });
             
             // Track scroll depth
             let maxScroll = 0;
@@ -1027,7 +1042,7 @@
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
             
             // Track modal open
-            trackEvent('modal_open', 'feedback', 'open', type);
+            trackEvent('click', 'feedback', 'open', type);
         }
 
         function closeFeedbackModal() {
@@ -1039,7 +1054,7 @@
             document.getElementById('feedbackForm').reset();
             
             // Track modal close
-            trackEvent('modal_close', 'feedback', 'close');
+            trackEvent('click', 'feedback', 'close');
         }
 
         // Close modal when clicking outside
