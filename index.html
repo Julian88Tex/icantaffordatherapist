@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.70">
+    <meta name="version" content="0.71">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JBNB0VE193"></script>
     <script>
@@ -836,6 +836,9 @@
         <button class="feedback-btn bug" onclick="openFeedbackModal('bug')">
             🐛 Report Bug
         </button>
+        <button class="feedback-btn" style="background: #8b5cf6;" onclick="testGA()">
+            🧪 Test GA
+        </button>
     </div>
 
     <!-- Feedback Modal -->
@@ -956,6 +959,11 @@
                 
                 // Track resource display
                 trackPageEngagement('resources_displayed', `${userSelections.budget}_${userSelections.time}_${visibleCount}`);
+                
+                // Re-attach link tracking for newly visible resources
+                setTimeout(() => {
+                    addLinkTracking();
+                }, 100);
             } else {
                 noSelection.style.display = 'block';
                 document.getElementById('resourceCounter').style.display = 'none';
@@ -965,6 +973,18 @@
         // Initialize the page
         updateResources();
         
+        // Test GA function
+        function testGA() {
+            console.log('Test GA button clicked!');
+            gtag('event', 'click', {
+                event_category: 'test',
+                event_action: 'test_button',
+                event_label: 'GA Test Button',
+                value: 1
+            });
+            alert('GA test event sent! Check console and GA dashboard.');
+        }
+        
         // Add tracking to all resource links
         function addLinkTracking() {
             // Track primary action links
@@ -973,6 +993,7 @@
                     const resourceCard = this.closest('.resource-card');
                     const resourceName = resourceCard.querySelector('h4').textContent;
                     trackResourceInteraction(resourceName, 'primary_link_click', 'primary');
+                    console.log('Primary link clicked:', resourceName);
                 });
             });
             
@@ -983,6 +1004,7 @@
                     const resourceName = resourceCard.querySelector('h4').textContent;
                     const linkText = this.textContent;
                     trackResourceInteraction(resourceName, 'secondary_link_click', linkText);
+                    console.log('Secondary link clicked:', resourceName, linkText);
                 });
             });
             
@@ -991,6 +1013,7 @@
                 link.addEventListener('click', function(e) {
                     const linkText = this.textContent;
                     trackEvent('click', 'crisis', 'link_click', linkText);
+                    console.log('Crisis link clicked:', linkText);
                 });
             });
         }
@@ -1004,6 +1027,19 @@
             gtag('event', 'page_view', {
                 page_title: 'I Can\'t Afford A Therapist',
                 page_location: window.location.href
+            });
+            
+            // Add direct test for Talkspace link
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('a[href*="talkspace.com"]')) {
+                    console.log('Talkspace link clicked directly!');
+                    gtag('event', 'click', {
+                        event_category: 'resource',
+                        event_action: 'primary_link_click',
+                        event_label: 'Talkspace',
+                        value: 'direct_test'
+                    });
+                }
             });
             
             // Track scroll depth
