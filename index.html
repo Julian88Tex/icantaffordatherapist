@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.75">
+    <meta name="version" content="0.77">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&display=swap" rel="stylesheet">
@@ -22,15 +22,6 @@
       // Google Analytics Event Tracking Functions
       function trackEvent(eventName, eventCategory, eventAction, eventLabel = null, eventValue = null) {
         gtag('event', eventName, {
-          event_category: eventCategory,
-          event_action: eventAction,
-          event_label: eventLabel,
-          value: eventValue
-        });
-        
-        // Debug logging
-        console.log('GA Event:', {
-          event_name: eventName,
           event_category: eventCategory,
           event_action: eventAction,
           event_label: eventLabel,
@@ -149,8 +140,7 @@
                 scroll-behavior: auto !important;
             }
             .resource-card.show,
-            .modal-content,
-            .no-selection::before {
+            .modal-content {
                 animation: none !important;
             }
             .option-btn, .action-primary, .btn, .feedback-toggle, .feedback-btn {
@@ -276,8 +266,6 @@
             .option-btn:hover {
                 background: var(--bg-light);
                 border-color: var(--primary);
-                transform: translateY(-3px);
-                box-shadow: 0 8px 20px var(--shadow-hover);
             }
         }
 
@@ -285,8 +273,6 @@
             background: var(--primary);
             color: white;
             border-color: var(--primary);
-            box-shadow: 0 4px 14px rgba(42, 92, 63, 0.35);
-            transform: translateY(-2px);
         }
 
 
@@ -324,15 +310,15 @@
 
         /* If the last visible card ends up alone in a row, let it fill the row */
         .resource-card.show.last-odd { grid-column: 1 / -1; }
-        .resource-card h4 { font-family: 'Fraunces', Georgia, serif; color: var(--text-dark); margin-bottom: 8px; font-size: 1.2em; font-weight: 700; letter-spacing: -0.2px; line-height: 1.2; }
+        .resource-card .resource-name { font-family: 'Fraunces', Georgia, serif; color: var(--text-dark); margin-bottom: 8px; font-size: 1.2em; font-weight: 700; letter-spacing: -0.2px; line-height: 1.2; }
         .resource-card p { color: var(--text-light); margin-bottom: 8px; line-height: 1.5; font-size: 0.88em; }
         .resource-info { display: flex; gap: 18px; margin: 8px 0; flex-wrap: wrap; align-items: baseline; }
         .info-item { display: inline-flex; align-items: baseline; gap: 6px; }
-        .info-label { font-size: 0.72em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; margin: 0; }
+        .info-label { font-size: 0.78em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; margin: 0; }
         .info-value { font-weight: 600; color: var(--text-dark); font-size: 0.85em; }
         .resource-card .action-link { color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; font-size: 14px; }
         .resource-card .action-link:hover { text-decoration: underline; }
-        .resource-links { margin-top: 14px; padding-top: 0; border-top: none; font-size: 0.78em; }
+        .resource-links { margin-top: 14px; padding-top: 0; border-top: none; font-size: 0.85em; }
         .resource-links a {
             color: var(--text-light);
             text-decoration: none;
@@ -385,7 +371,6 @@
                 color: white !important;
                 border-color: var(--primary-dark);
                 text-decoration: none;
-                transform: translateY(-1px);
             }
         }
         .action-primary:focus-visible {
@@ -398,7 +383,7 @@
         .disclaimer-box { background: var(--crisis-bg); border: 1px solid var(--crisis-border); color: var(--crisis-text); padding: 12px 16px; border-radius: 6px; margin-top: 16px; margin-bottom: 16px; font-size: 0.85em; }
         /* Consistent vertical spacing inside cards */
         .resource-card > * + * { margin-top: 10px; }
-        .tip-box { background: transparent; padding: 0; border-radius: 0; margin-top: 8px; font-size: 0.78em; color: var(--text-muted); border-left: none; font-style: italic; line-height: 1.55; }
+        .tip-box { background: transparent; padding: 0; border-radius: 0; margin-top: 8px; font-size: 0.85em; color: var(--text-muted); border-left: none; font-style: italic; line-height: 1.55; }
         .tip-box:empty { display: none; }
         .disclaimer-box:empty { display: none; }
 
@@ -419,18 +404,6 @@
             border: none;
             border-radius: 0;
             margin: 0;
-        }
-
-        .no-selection::before {
-            content: "👆";
-            font-size: 3em;
-            margin-bottom: 20px;
-            animation: gentlePulse 2.4s ease-in-out infinite;
-        }
-
-        @keyframes gentlePulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
         }
 
         /* Footer */
@@ -501,7 +474,6 @@
         @media (hover: hover) and (pointer: fine) {
             .feedback-toggle:hover {
                 background: var(--accent-dark);
-                transform: scale(1.05);
             }
         }
 
@@ -527,7 +499,7 @@
         .feedback-btn:active { transform: scale(0.97); }
 
         @media (hover: hover) and (pointer: fine) {
-            .feedback-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+            .feedback-btn:hover { opacity: 0.9; }
         }
 
         .feedback-btn.feature { background: #2d7a50; }
@@ -543,7 +515,7 @@
             .crisis-content { flex-direction: row; text-align: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
             .crisis-text { font-size: 0.9em; }
             .crisis-links { flex-direction: row; gap: 6px; flex-wrap: wrap; justify-content: center; }
-            .crisis-link { padding: 6px 10px; font-size: 12px; }
+            .crisis-link { padding: 6px 10px; font-size: 13px; }
             .option-buttons { grid-template-columns: 1fr; }
             .option-btn { 
                 padding: 20px 16px; 
@@ -552,14 +524,10 @@
                 border-width: 4px;
                 margin-bottom: 8px;
             }
-            .no-selection { 
-                padding: 40px 20px; 
-                font-size: 1.2em; 
+            .no-selection {
+                padding: 40px 20px;
+                font-size: 1.2em;
                 min-height: 200px;
-            }
-            .no-selection::before {
-                font-size: 2.5em;
-                margin-bottom: 15px;
             }
             .resources-grid { grid-template-columns: 1fr; gap: 1px; }
             .resource-info { gap: 15px; }
@@ -584,9 +552,9 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .crisis-link { 
-                padding: 5px 8px; 
-                font-size: 11px; 
+            .crisis-link {
+                padding: 5px 8px;
+                font-size: 13px;
             }
         }
 
@@ -701,6 +669,12 @@
             resize: vertical;
         }
 
+        .form-note {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
         .button-group {
             display: flex;
             gap: 15px;
@@ -774,7 +748,7 @@
     </header>
 
     <!-- Crisis Banner -->
-    <div class="crisis-banner">
+    <section class="crisis-banner" aria-label="Crisis support, available 24/7">
         <div class="container">
             <div class="crisis-content">
                 <div class="crisis-text">
@@ -782,36 +756,37 @@
                 </div>
                 <div class="crisis-links">
                     <a href="tel:988" class="crisis-link">Call or Text 988</a>
-                    <a href="sms:741741&body=HOME" class="crisis-link">Text HOME to 741741</a>
-                    <a href="https://www.crisistextline.org" target="_blank" class="crisis-link">Chat Online</a>
+                    <a href="sms:741741?&body=HOME" class="crisis-link">Text HOME to 741741</a>
+                    <a href="https://www.crisistextline.org" target="_blank" rel="noopener noreferrer" class="crisis-link">Chat Online</a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Main Interactive Section -->
     <main id="main" class="main-section">
         <div class="container">
+            <h2 class="sr-only">Find options that fit your budget and timeline</h2>
             <div class="selector-container">
-                <button class="clear-button" id="clearBtn" aria-label="Clear selections">Clear</button>
+                <button type="button" class="clear-button" id="clearBtn" aria-label="Clear selections">Clear</button>
 
                 
                 <div class="question">
                     <h3 id="budgetLabel">What can you realistically spend per session?</h3>
                     <div class="option-buttons" id="budgetOptions" role="group" aria-labelledby="budgetLabel">
-                        <button class="option-btn" data-category="budget" data-value="free" aria-pressed="false">Nothing <span class="detail">$0</span></button>
-                        <button class="option-btn" data-category="budget" data-value="low" aria-pressed="false">A little <span class="detail">Under $40</span></button>
-                        <button class="option-btn" data-category="budget" data-value="medium" aria-pressed="false">Some wiggle room <span class="detail">$40-80</span></button>
-                        <button class="option-btn" data-category="budget" data-value="high" aria-pressed="false">More flexible <span class="detail">$80+</span></button>
+                        <button type="button" class="option-btn" data-category="budget" data-value="free" aria-pressed="false">Nothing <span class="detail">$0</span></button>
+                        <button type="button" class="option-btn" data-category="budget" data-value="low" aria-pressed="false">A little <span class="detail">Under $40</span></button>
+                        <button type="button" class="option-btn" data-category="budget" data-value="medium" aria-pressed="false">Some wiggle room <span class="detail">$40-80</span></button>
+                        <button type="button" class="option-btn" data-category="budget" data-value="high" aria-pressed="false">More flexible <span class="detail">$80+</span></button>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3 id="timeLabel">How much time do you have to look for resources?</h3>
                     <div class="option-buttons" id="timeOptions" role="group" aria-labelledby="timeLabel">
-                        <button class="option-btn" data-category="time" data-value="now" aria-pressed="false"><span aria-hidden="true">🚨</span> I need something today</button>
-                        <button class="option-btn" data-category="time" data-value="week" aria-pressed="false"><span aria-hidden="true">⏰</span> I have a few hours</button>
-                        <button class="option-btn" data-category="time" data-value="month" aria-pressed="false"><span aria-hidden="true">📅</span> I can spend some time</button>
+                        <button type="button" class="option-btn" data-category="time" data-value="now" aria-pressed="false">I need something today</button>
+                        <button type="button" class="option-btn" data-category="time" data-value="week" aria-pressed="false">I have a few hours</button>
+                        <button type="button" class="option-btn" data-category="time" data-value="month" aria-pressed="false">I can spend some time</button>
                     </div>
                 </div>
                 
@@ -822,186 +797,187 @@
 
             <!-- Dynamic Resources -->
             <div class="resources-container">
-                <div class="resource-counter" id="resourceCounter" style="display: none;">
+                <h2 class="sr-only">Matching options</h2>
+                <div class="resource-counter" id="resourceCounter" style="display: none;" aria-live="polite">
                     <span id="resourceCount">0</span> options found
                 </div>
                 <div class="resources-grid" id="resourcesGrid">
                     <!-- No selection message -->
                     <div class="no-selection" id="noSelection">
-                        <p><strong>Click the buttons above to get started!</strong></p>
-                        <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Choose your budget and timeline to see personalized therapy options</p>
+                        <p><strong>Pick a budget and a timeline above.</strong></p>
+                        <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Once you answer both questions, options that fit will show up here.</p>
                     </div>
 
                     <!-- Crisis Resources (show for any budget when time=now) -->
                     <div class="resource-card" data-tags="free low medium high now">
-                        <h4>988 Suicide & Crisis Lifeline</h4>
+                        <h3 class="resource-name">988 Suicide & Crisis Lifeline</h3>
                         <p>Free, confidential support available 24/7. Call or text 988 to speak with a trained crisis counselor.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
                         </div>
-                        <a href="tel:988" class="action-link action-primary">Call 988 Now →</a>
+                        <a href="tel:988" class="action-link action-primary">Call 988</a>
                         <div class="tip-box"></div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=988+suicide+crisis+lifeline" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=988+suicide+crisis+lifeline" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="free low medium high now">
-                        <h4>Crisis Text Line</h4>
+                        <h3 class="resource-name">Crisis Text Line</h3>
                         <p>Text HOME to 741741 to connect with a crisis counselor via text message. Available 24/7.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
                         </div>
-                        <a href="sms:741741&body=HOME" class="action-link action-primary">Text HOME to 741741 →</a>
+                        <a href="sms:741741?&body=HOME" class="action-link action-primary">Text HOME to 741741</a>
                         <div class="tip-box"></div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=crisis+text+line" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=crisis+text+line" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <!-- Resource cards (hidden initially) -->
                     <div class="resource-card" data-tags="free low now week">
-                        <h4>AI Therapy Chatbots</h4>
+                        <h3 class="resource-name">AI Therapy Chatbots</h3>
                         <p>AI chat tools that may offer mental health support. Use your judgment and research carefully.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Right now</span></div>
                         </div>
-                        <a href="https://www.google.com/search?q=AI+therapy+chatbots" target="_blank" class="action-link action-primary">Search Google for AI Therapy Chatbots →</a>
+                        <a href="https://www.google.com/search?q=AI+therapy+chatbots" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Search for AI therapy chatbots</a>
                         <div class="disclaimer-box">
                             We are not linking to specific AI therapy tools here. Many health professionals have concerns about potential risks. Please research carefully before deciding if AI chatbots are right for you.
                         </div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=AI+therapy+chatbots" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=AI+therapy+chatbots" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="low medium high now week">
-                        <h4>BetterHelp</h4>
+                        <h3 class="resource-name">BetterHelp</h3>
                         <p>Online therapy with licensed professionals using a weekly subscription model. Text, phone, or video options.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$60-90/week</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-2 days</span></div>
                         </div>
-                        <a href="https://www.betterhelp.com" target="_blank" class="action-link action-primary">Visit BetterHelp →</a>
+                        <a href="https://www.betterhelp.com" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Visit BetterHelp</a>
                         <div class="tip-box">Financial aid available. Can reduce cost by 40%.</div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=BetterHelp" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=BetterHelp" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="medium high now week">
-                        <h4>Talkspace</h4>
+                        <h3 class="resource-name">Talkspace</h3>
                         <p>Online therapy service offering different plans based on messaging and live session options.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$69-109/week</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">Same day</span></div>
                         </div>
-                        <a href="https://www.talkspace.com" target="_blank" class="action-link action-primary">Visit Talkspace →</a>
+                        <a href="https://www.talkspace.com" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Visit Talkspace</a>
                         <div class="tip-box"></div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=Talkspace" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Talkspace" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="low medium month week">
-                        <h4>Open Path Psychotherapy</h4>
+                        <h3 class="resource-name">Open Path Psychotherapy</h3>
                         <p>Network of therapists offering lower rates. Pay once to join, then book sessions at reduced prices.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$40-80/session</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-2 weeks</span></div>
                         </div>
-                        <a href="https://openpathcollective.org" target="_blank" class="action-link action-primary">Join Open Path →</a>
+                        <a href="https://openpathcollective.org" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Join Open Path</a>
                         <div class="tip-box">$65 lifetime membership if you make under $100k.</div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=Open+Path+Psychotherapy" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Open+Path+Psychotherapy" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="free low month">
-                        <h4>Community Mental Health Centers</h4>
+                        <h3 class="resource-name">Community Mental Health Centers</h3>
                         <p>Government-funded clinics that charge based on what you can afford.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$0-40/session</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">2-4 weeks (varies)</span></div>
                         </div>
-                        <a href="https://findtreatment.samhsa.gov" target="_blank" class="action-link action-primary">Find Centers →</a>
+                        <a href="https://findtreatment.samhsa.gov" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Find a center near you</a>
                         <div class="tip-box"></div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=community+mental+health+centers" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=community+mental+health+centers" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="low month">
-                        <h4>University Training Clinics</h4>
+                        <h3 class="resource-name">University Training Clinics</h3>
                         <p>Graduate training clinics provide lower-cost therapy, supervised by licensed professionals.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$15-50/session</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">2-3 weeks</span></div>
                         </div>
-                        <a href="https://www.google.com/search?q=university+counseling+training+clinic" target="_blank" class="action-link action-primary">Search for Clinics →</a>
+                        <a href="https://www.google.com/search?q=university+counseling+training+clinic" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Search for a clinic</a>
                         <div class="tip-box">Google "[your city] university counseling training clinic"</div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=university+counseling+training+clinics" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=university+counseling+training+clinics" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="low medium high month">
-                        <h4>Psychology Today Directory</h4>
+                        <h3 class="resource-name">Psychology Today Directory</h3>
                         <p>Directory where therapists list their practices. Filter by sliding scale and availability.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$50-200/session</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-3 weeks</span></div>
                         </div>
-                        <a href="https://www.psychologytoday.com/us/therapists" target="_blank" class="action-link action-primary">Search Therapists →</a>
+                        <a href="https://www.psychologytoday.com/us/therapists" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Search the directory</a>
                         <div class="tip-box">Filter by "sliding scale" and state your budget upfront.</div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=Psychology+Today+therapist+directory" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Psychology+Today+therapist+directory" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="free week month">
-                        <h4>Employee Assistance Program (EAP)</h4>
+                        <h3 class="resource-name">Employee Assistance Program (EAP)</h3>
                         <p>Many employers offer confidential, short-term counseling at no cost to the employee.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Free (limited sessions)</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">3-7 days</span></div>
                         </div>
-                        <a href="https://www.google.com/search?q=Employee+Assistance+Program+EAP" target="_blank" class="action-link action-primary">Learn About EAP →</a>
+                        <a href="https://www.google.com/search?q=Employee+Assistance+Program+EAP" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Ask HR about your EAP</a>
                         <div class="tip-box">Ask HR: "Do we have an EAP?"</div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=Employee+Assistance+Program+EAP+mental+health" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Employee+Assistance+Program+EAP+mental+health" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <div class="resource-card" data-tags="medium high now">
-                        <h4>Cerebral</h4>
+                        <h3 class="resource-name">Cerebral</h3>
                         <p>Online mental health care with therapy and optional medication management.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">$85-325/month</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-3 days</span></div>
                         </div>
-                        <a href="https://cerebral.com" target="_blank" class="action-link action-primary">Visit Cerebral →</a>
+                        <a href="https://cerebral.com" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Visit Cerebral</a>
                         <div class="tip-box"></div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=Cerebral+mental+health" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=Cerebral+mental+health" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
 
                     <!-- Insurance Benefits Resource (visible for any budget when time=month) -->
                     <div class="resource-card" data-tags="free low medium high month">
-                        <h4>Check Your Insurance Benefits</h4>
+                        <h3 class="resource-name">Check Your Insurance Benefits</h3>
                         <p>Some insurance plans include a certain number of free or low-cost therapy sessions each year. This usually takes some time to set up.</p>
                         <div class="resource-info">
                             <div class="info-item"><span class="info-label">Cost</span><span class="info-value">Varies (often copay; sometimes sessions free)</span></div>
                             <div class="info-item"><span class="info-label">Time to Start</span><span class="info-value">1-3 weeks</span></div>
                         </div>
-                        <a href="https://www.google.com/search?q=health+insurance+mental+health+benefits" target="_blank" class="action-link action-primary">Learn About Benefits →</a>
+                        <a href="https://www.google.com/search?q=health+insurance+mental+health+benefits" target="_blank" rel="noopener noreferrer" class="action-link action-primary">Call your insurance</a>
                         <div class="tip-box">Call the number on your insurance card and ask: Do I have mental health coverage? How many therapy sessions are covered and at what cost? Do I have any free sessions? How do I find in-network therapists?</div>
                         <div class="resource-links">
-                            <a href="https://www.google.com/search?tbm=nws&q=health+insurance+therapy+benefits" target="_blank">Research on Google News</a>
+                            <a href="https://www.google.com/search?tbm=nws&q=health+insurance+therapy+benefits" target="_blank" rel="noopener noreferrer">Recent news coverage</a>
                         </div>
                     </div>
                 </div>
@@ -1011,19 +987,19 @@
 
     <!-- Feedback Menu -->
     <div class="feedback-buttons">
-        <div class="feedback-menu-items" id="feedbackMenuItems" role="menu" aria-label="Feedback options">
-            <button class="feedback-btn feature" role="menuitem" onclick="openFeedbackModal('feature')"><span aria-hidden="true">💡</span> Feature Request</button>
-            <button class="feedback-btn bug" role="menuitem" onclick="openFeedbackModal('bug')"><span aria-hidden="true">🐛</span> Report Bug</button>
+        <div class="feedback-menu-items" id="feedbackMenuItems">
+            <button type="button" class="feedback-btn feature" onclick="openFeedbackModal('feature')">Suggest an improvement</button>
+            <button type="button" class="feedback-btn bug" onclick="openFeedbackModal('bug')">Report a problem</button>
         </div>
-        <button class="feedback-toggle" id="feedbackToggle" onclick="toggleFeedbackMenu()" aria-label="Open feedback menu" aria-expanded="false" aria-controls="feedbackMenuItems">?</button>
+        <button type="button" class="feedback-toggle" id="feedbackToggle" onclick="toggleFeedbackMenu()" aria-label="Open feedback menu" aria-expanded="false" aria-controls="feedbackMenuItems">?</button>
     </div>
 
     <!-- Feedback Modal -->
     <div id="feedbackModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="feedbackModalTitle">Feedback & Support</h2>
-                <button class="close-btn" onclick="closeFeedbackModal()" aria-label="Close feedback dialog">&times;</button>
+                <h2 id="feedbackModalTitle">Send feedback</h2>
+                <button type="button" class="close-btn" onclick="closeFeedbackModal()" aria-label="Close feedback dialog">&times;</button>
             </div>
             <form id="feedbackForm">
                 <div class="form-group">
@@ -1038,18 +1014,18 @@
 
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" placeholder="Brief description of the issue or feature" required>
+                    <input type="text" id="title" name="title" required>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea id="description" name="description" placeholder="Please provide detailed information..." required></textarea>
+                    <textarea id="description" name="description" placeholder="What happened, or what would help?" required></textarea>
                 </div>
 
-
+                <p class="form-note">Submitting opens a pre-filled GitHub issue in a new tab. No account info is collected here.</p>
 
                 <div class="button-group">
-                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    <button type="submit" class="btn btn-primary">Submit feedback</button>
                     <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()">Cancel</button>
                 </div>
             </form>
@@ -1060,7 +1036,7 @@
     <footer>
         <div class="container">
             <p>Not medical advice. Crisis? Call 988.</p>
-            <p>Dedicated to my friends. Love 💜, <a href="http://linktr.ee/julianjoseph" target="_blank">Julian</a> | <a href="https://github.com/Julian88Tex/icantaffordatherapist" target="_blank">Source</a></p>
+            <p>Dedicated to my friends. Love 💜, <a href="http://linktr.ee/julianjoseph" target="_blank" rel="noopener noreferrer">Julian</a> | <a href="https://github.com/Julian88Tex/icantaffordatherapist" target="_blank" rel="noopener noreferrer">Source</a></p>
         </div>
     </footer>
 
@@ -1174,9 +1150,8 @@
             document.querySelectorAll('.action-primary').forEach(link => {
                 link.addEventListener('click', function(e) {
                     const resourceCard = this.closest('.resource-card');
-                    const resourceName = resourceCard.querySelector('h4').textContent;
+                    const resourceName = resourceCard.querySelector('.resource-name').textContent;
                     trackResourceInteraction(resourceName, 'primary_link_click', 'primary');
-                    console.log('Primary link clicked:', resourceName);
                 });
             });
             
@@ -1184,47 +1159,38 @@
             document.querySelectorAll('.resource-links a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     const resourceCard = this.closest('.resource-card');
-                    const resourceName = resourceCard.querySelector('h4').textContent;
-                    const linkText = this.textContent;
+                    const resourceName = resourceCard.querySelector('.resource-name').textContent;
+                    const linkText = this.textContent.replace(' (opens in new tab)', '').trim();
                     trackResourceInteraction(resourceName, 'secondary_link_click', linkText);
-                    console.log('Secondary link clicked:', resourceName, linkText);
                 });
             });
             
             // Track crisis links
             document.querySelectorAll('.crisis-link').forEach(link => {
                 link.addEventListener('click', function(e) {
-                    const linkText = this.textContent;
+                    const linkText = this.textContent.replace(' (opens in new tab)', '').trim();
                     trackEvent('click', 'crisis', 'link_click', linkText);
-                    console.log('Crisis link clicked:', linkText);
                 });
             });
         }
         
+        // Tell screen reader users when a link opens in a new tab
+        function labelNewTabLinks() {
+            document.querySelectorAll('a[target="_blank"]').forEach(link => {
+                if (link.querySelector('.sr-only')) return;
+                const note = document.createElement('span');
+                note.className = 'sr-only';
+                note.textContent = ' (opens in new tab)';
+                link.appendChild(note);
+            });
+        }
+
         // Initialize link tracking when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             addLinkTracking();
+            labelNewTabLinks();
             trackPageEngagement('page_load', 'initial');
-            
-            // Test event that should show up as a key event
-            gtag('event', 'page_view', {
-                page_title: 'I Can\'t Afford A Therapist',
-                page_location: window.location.href
-            });
-            
-            // Add direct test for Talkspace link
-            document.addEventListener('click', function(e) {
-                if (e.target.matches('a[href*="talkspace.com"]')) {
-                    console.log('Talkspace link clicked directly!');
-                    gtag('event', 'click', {
-                        event_category: 'resource',
-                        event_action: 'primary_link_click',
-                        event_label: 'Talkspace',
-                        value: 'direct_test'
-                    });
-                }
-            });
-            
+
             // Track scroll depth
             let maxScroll = 0;
             window.addEventListener('scroll', function() {
@@ -1257,16 +1223,21 @@
             toggle.setAttribute('aria-label', isOpen ? 'Close feedback menu' : 'Open feedback menu');
         }
 
+        let lastFocusedElement = null;
+
         function openFeedbackModal(type) {
             toggleFeedbackMenu();
             const modal = document.getElementById('feedbackModal');
             const typeSelect = document.getElementById('type');
-            
+
+            // Remember where focus was so we can put it back on close
+            lastFocusedElement = document.activeElement;
+
             // Pre-select the type if provided
             if (type) {
                 typeSelect.value = type;
             }
-            
+
             modal.style.display = 'block';
             modal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -1282,13 +1253,37 @@
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = 'auto'; // Restore scrolling
-            
+
             // Reset form
             document.getElementById('feedbackForm').reset();
-            
+
+            // Return focus to where it was before the modal opened
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+                lastFocusedElement = null;
+            }
+
             // Track modal close
             trackEvent('click', 'feedback', 'close');
         }
+
+        // Keep Tab focus inside the modal while it's open
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Tab') return;
+            const modal = document.getElementById('feedbackModal');
+            if (!modal || modal.style.display !== 'block') return;
+            const focusable = modal.querySelectorAll('button, input, select, textarea, a[href]');
+            if (focusable.length === 0) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
 
         // Close modal when clicking outside
         window.onclick = function(event) {
